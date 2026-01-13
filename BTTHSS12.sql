@@ -88,8 +88,10 @@ join Student s on s.DeptID=d.DeptID
 group by d.DeptID;
 --
 select * from View_StudentCountByDept
-where 
-group by DeptName;
+where TotalStudents=(
+	select Max(TotalStudents)
+    from  View_StudentCountByDept
+)
 --
 delimiter //
 create procedure GetTopScoreStudent(
